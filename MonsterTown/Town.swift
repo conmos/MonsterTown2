@@ -1,0 +1,49 @@
+//
+//  Town.swift
+//  MonsterTown
+//
+//  Created by Conor Mosier on 4/8/18.
+//  Copyright © 2018 Homer Applications Group. All rights reserved.
+//if a method changes the properties in a struct it must be marked with "mutating"
+
+import Foundation
+
+struct Town {
+   static let region = "South"
+    var population = 5_422 {
+        didSet(oldPopulation) {
+            print("The population has changed to \(population) from \(oldPopulation)")
+        }
+    }
+    
+    var numberOfStoplights = 4
+    
+    enum Size {
+        case small
+        case medium
+        case large
+    }
+     var townSize: Size {
+        get {
+        switch self.population {
+        case 0...10_000:
+            return Size.small
+            
+        case 10_001...100_000:
+            return Size.medium
+            
+        default:
+            return Size.large
+        }
+        }
+    }
+    
+    func printDescription() {
+        print("Population: \(population) ; number of stoplights: \(numberOfStoplights)")
+    }
+    mutating func changePopulation(by amount: Int) {
+        population += amount
+    }
+    
+}
+
